@@ -5,10 +5,12 @@ package com.scrollarchivist.simplescrollarchivistrepository.models;
  */
 public class MainModel {
     // <editor-fold defaultstate="collapsed" desc="Constructeurs">
-    
+    private MainModel() {}
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Proprietes">
-    
+    public final static String APP_TITLE = "Scroll Archivist Repository";
+    public final static int APP_MIN_WIDTH = 800;
+    public final static int APP_MIN_HEIGHT = 600;
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Methodes">
     
