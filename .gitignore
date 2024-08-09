@@ -1,0 +1,11 @@
+# Ignore everything by default
+*
+
+# Unignore directories so we can navigate to them
+!*/
+
+# Unignore src directories in any subdirectories
+!*/src/
+
+# Unignore files in src directories
+!*/src/**
