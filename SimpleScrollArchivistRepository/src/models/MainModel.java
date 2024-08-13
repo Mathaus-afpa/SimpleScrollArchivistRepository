@@ -11,6 +11,7 @@ public class MainModel {
     public final static String APP_TITLE = "Scroll Archivist Repository";
     public final static int APP_MIN_WIDTH = 800;
     public final static int APP_MIN_HEIGHT = 600;
+    public final static String[] APP_MENU_TAB = { "Livres", "Abonnés", "Emprunts" };
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Methodes">
     

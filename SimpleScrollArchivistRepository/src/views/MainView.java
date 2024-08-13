@@ -1,14 +1,18 @@
 package com.scrollarchivist.simplescrollarchivistrepository.views;
 import com.scrollarchivist.simplescrollarchivistrepository.models.MainModel;
 import com.scrollarchivist.simplescrollarchivistrepository.views.tools.Colors;
+import com.scrollarchivist.simplescrollarchivistrepository.views.tools.CustomBasicTabbedPaneUI;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Insets;
 import javax.swing.BoxLayout;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 import javax.swing.SpringLayout;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 import org.springframework.stereotype.Component;
 /**
  * [MainView] - class
@@ -26,6 +30,8 @@ public class MainView {
     public void show() {
         SwingUtilities.invokeLater(() -> {
             JPanel body = newBody();
+            JTabbedPane mainMenu = createTabbedPane(body);
+            fillMainMenu(mainMenu);
             setBackGround(body);
         });
     }
@@ -81,6 +87,44 @@ public class MainView {
         background.add(blue);
         background.add(pink);
         parent.add(background);
+    }
+    /**
+     * Creer un JTabbedPane avec une marge
+     * @param parent
+     * @return (JTabbedPane)
+     */
+    private JTabbedPane createTabbedPane(JComponent parent) {
+        JTabbedPane tabbedPane = new JTabbedPane();
+        setSpringLayout(parent, tabbedPane, 4);
+        parent.add(tabbedPane);
+        customizeTabbedPane(tabbedPane);
+        return tabbedPane;
+    }
+    /**
+     * Permet de personnaliser l'apparence des onglets.
+     * Fixe également la couleur du texte par defaut.
+     * @param tabbedPane 
+     */
+    private void customizeTabbedPane(JTabbedPane tabbedPane) {
+        tabbedPane.setUI(new CustomBasicTabbedPaneUI());
+        tabbedPane.setForeground(Color.BLACK);
+    }
+    /**
+     * Affiche dans un JTabbedPane les onglets principaux:
+     * Livres, Abonnés et Emprunts.
+     * @param tabbedPaneMenu 
+     */
+    private void fillMainMenu(JTabbedPane tabbedPaneMenu) {
+        for (String text : MainModel.APP_MENU_TAB) {
+            tabbedPaneMenu.addTab(text, new JPanel(){{ setBackground(Colors.IVORY);}});
+        } 
+    }
+    /**
+     * Fixe les Insets par défaut.
+     */
+    public static void setUpInsets() {
+        Insets insets = new Insets(0, 0, 0, 0);
+        UIManager.put("TabbedPane.contentBorderInsets", insets);
     }
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Getter">

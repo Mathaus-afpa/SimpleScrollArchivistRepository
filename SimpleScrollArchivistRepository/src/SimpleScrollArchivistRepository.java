@@ -1,5 +1,6 @@
 package com.scrollarchivist.simplescrollarchivistrepository;
 import com.scrollarchivist.simplescrollarchivistrepository.controllers.MainController;
+import com.scrollarchivist.simplescrollarchivistrepository.views.MainView;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -11,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 @ComponentScan(basePackages = "com.scrollarchivist")
 public class SimpleScrollArchivistRepository {
     public static void main(String[] args) {
+        MainView.setUpInsets();
         try (AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SimpleScrollArchivistRepository.class)) {
             SimpleScrollArchivistRepository app = context.getBean(SimpleScrollArchivistRepository.class);
             MainController launcher = context.getBean(MainController.class);
