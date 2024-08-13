@@ -4,10 +4,13 @@ import com.scrollarchivist.simplescrollarchivistrepository.views.tools.Colors;
 import com.scrollarchivist.simplescrollarchivistrepository.views.tools.CustomBasicTabbedPaneUI;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.Insets;
 import javax.swing.BoxLayout;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.SpringLayout;
@@ -30,6 +33,7 @@ public class MainView {
     public void show() {
         SwingUtilities.invokeLater(() -> {
             JPanel body = newBody();
+            addMainTitle(body);
             JTabbedPane mainMenu = createTabbedPane(body);
             fillMainMenu(mainMenu);
             setBackGround(body);
@@ -118,6 +122,23 @@ public class MainView {
         for (String text : MainModel.APP_MENU_TAB) {
             tabbedPaneMenu.addTab(text, new JPanel(){{ setBackground(Colors.IVORY);}});
         } 
+    }
+    /**
+     * Creer un panel avec le titre de l'application.
+     * @param parent
+     * @return title (JPanel)
+     */
+    private JPanel addMainTitle(JComponent parent) {
+        JPanel headerPanel = new JPanel();
+        setSpringLayout(parent, headerPanel, 0);
+        headerPanel.setLayout(new FlowLayout(FlowLayout.RIGHT,24,0));
+        headerPanel.setOpaque(false);
+        JLabel appNameLabel = new JLabel(MainModel.APP_TITLE);
+        appNameLabel.setFont(new Font("Brush Script MT", Font.ITALIC, 28));
+        appNameLabel.setForeground(Color.BLACK);
+        headerPanel.add(appNameLabel);
+        parent.add(headerPanel);
+        return headerPanel;
     }
     /**
      * Fixe les Insets par défaut.
