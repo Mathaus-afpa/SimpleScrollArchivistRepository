@@ -12,6 +12,7 @@ public class Colors {
     public final static Color IVORY = new Color(255, 255, 240);
     public final static Color BLUE = new Color(91, 206, 250);
     public final static Color PINK = new Color(245, 169, 184);
+    public final static Color TRANSPARENT = new Color(255, 255, 240, 0);
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Methodes">
     
