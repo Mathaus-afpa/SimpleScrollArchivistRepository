@@ -9,8 +9,12 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Insets;
 import java.awt.LayoutManager;
+import java.io.File;
+import java.util.Arrays;
+import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,7 +26,10 @@ import javax.swing.JTable;
 import javax.swing.SpringLayout;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
-import javax.swing.table.DefaultTableModel;
+import views.FileTableModel;
+import views.TableDeleteButtonEditor;
+import views.tools.SARTableButtonEnum;
+import views.tools.SARTableButtons;
 /**
  * [MainView] - class
  * @author Mathaus
@@ -218,8 +225,13 @@ public class MainView {
      * @return Un JScrollPane avec les donnees formattees pour l'affichage.
      */
     private static JScrollPane createTableView(String tableName) {
-        DefaultTableModel model = new DefaultTableModel(MainModel.getTableLines(tableName), MainModel.getTableColumnsName(tableName));
-        JTable table = new JTable(model);
+            List<File> files = Arrays.asList(new File(".").listFiles());
+            FileTableModel model = new FileTableModel(files);
+            JTable table = new JTable(model);
+            //table.setDefaultEditor(File.class, new TableDeleteButtonEditor());
+            //table.setDefaultRenderer(File.class, new TableDeleteButtonEditor());
+            table.getColumnModel().getColumn(1).setCellRenderer(new TableDeleteButtonEditor());
+            table.getColumnModel().getColumn(1).setCellEditor(new TableDeleteButtonEditor());
         JScrollPane tableView = new JScrollPane(table);
         tableView.getViewport().setBackground(Colors.IVORY);
         return tableView;
@@ -233,6 +245,12 @@ public class MainView {
         tableSubMenu.setBackground(Colors.IVORY);
         tableSubMenu.setPreferredSize(new Dimension(0, 26));
         tableSubMenu.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.BLACK));
+        JButton button = new SARTableButtons(SARTableButtonEnum.SAVE);
+        JButton button2 = new SARTableButtons(SARTableButtonEnum.CANCEL);
+        JButton button3 = new SARTableButtons(SARTableButtonEnum.EDIT);
+        tableSubMenu.add(button);
+        tableSubMenu.add(button2);
+        tableSubMenu.add(button3);
         return tableSubMenu;
     }
     // </editor-fold>
